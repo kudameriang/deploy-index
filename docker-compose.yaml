@@ -1,0 +1,18 @@
+services:
+  webserver:
+    image: litespeedtech/openlitespeed
+    container_name: webserver
+    hostname: webserver
+    restart: always
+    ports:
+      - 8084:80
+    volumes:
+      - ./index.html:/app/web/index.html
+      - ./config/httpd_config.conf:/usr/local/lsws/conf/httpd_config.conf
+      - ./config/index.conf:/usr/local/lsws/conf/vhosts/index.conf
+    networks:
+      - indexnet
+
+networks:
+  indexnet:
+    driver: bridge
